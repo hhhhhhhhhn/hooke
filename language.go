@@ -1,8 +1,8 @@
 package main
 
 type Language struct {
-	Code           string
-	WordCharacters []byte
-	IsStopWord     func(word string) bool
-	Stem           func(word string) string
+	Code            string
+	isWordCharacter func(chr rune) bool
+	IsStopWord      func(word string) bool
+	Stem            func(word string) string
 }

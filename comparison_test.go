@@ -136,3 +136,10 @@ func TestNewComparison(t *testing.T) {
 	assert.Equal(t, 2, len(testComparison.Matches))
 	assert.Equal(t, 1, len(testComparison.Clusters))
 }
+
+func TestEmptyNewComparison(t *testing.T) {
+	testComparison := NewComparison(&Text{}, &Text{}, 0)
+
+	assert.Equal(t, 0, len(testComparison.Matches))
+	assert.Equal(t, 0, len(testComparison.Clusters))
+}
