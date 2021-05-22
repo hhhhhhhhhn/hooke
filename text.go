@@ -44,51 +44,25 @@ func (t *Text) getWords() {
 }
 
 func (t *Text) getWordStartsAndEnds() {
-	wordCount := t.countWords()
-
-	t.WordsStartIndexes = make([]int, wordCount)
-	t.WordsEndIndexes = make([]int, wordCount)
-
+	t.getLowercase()
 	inWord := false
-	word := 0
 
 	for i, chr := range t.LowercaseRaw {
 		if t.Language.isWordCharacter(chr) {
 			if !inWord {
 				inWord = true
-				t.WordsStartIndexes[word] = i
+				t.WordsStartIndexes = append(t.WordsStartIndexes, i)
 			}
 		} else { // chr is not a word character
 			if inWord {
 				inWord = false
-				t.WordsEndIndexes[word] = i
-				word++
+				t.WordsEndIndexes = append(t.WordsEndIndexes, i)
 			}
 		}
 	}
 	if inWord {
-		t.WordsEndIndexes[word] = len(t.LowercaseRaw)
+		t.WordsEndIndexes = append(t.WordsEndIndexes, len(t.LowercaseRaw))
 	}
-}
-
-func (t *Text) countWords() (count int) {
-	t.getLowercase()
-	count = 0
-	inWord := false
-
-	for _, chr := range t.LowercaseRaw {
-		if t.Language.isWordCharacter(chr) {
-			if !inWord {
-				inWord = true
-				count++
-			}
-		} else { // chr is not a word character
-			if inWord {
-				inWord = false
-			}
-		}
-	}
-	return count
 }
 
 func (t *Text) getLowercase() {

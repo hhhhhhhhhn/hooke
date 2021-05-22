@@ -24,11 +24,6 @@ var testText = &Text{
 	Language: testLanguage,
 }
 
-func TestCountWords(t *testing.T) {
-	count := testText.countWords()
-	assert.Equal(t, 2, count)
-}
-
 func TestWordGetStartAndEndIndexes(t *testing.T) {
 	testTextCopy := *testText
 	testTextCopy.getWordStartsAndEnds()
@@ -48,10 +43,9 @@ func TestGetWordsWithoutEnding(t *testing.T) {
 		Raw:      "stop test test",
 		Language: testLanguage,
 	}
-	count := text.countWords()
-	assert.Equal(t, 3, count)
 
 	text.getWords()
+	assert.Equal(t, 3, len(text.Words))
 	assert.Equal(t, []int{0, 5, 10}, text.WordsStartIndexes)
 	assert.Equal(t, []string{"stop", "test", "test"}, text.Words)
 }
