@@ -81,6 +81,17 @@ func TestNewText(t *testing.T) {
 	assert.Equal(t, []string{"tt", "tes", "tes"}, testText.ProcessedWords, "NewText processes")
 }
 
+func TestPostProcess(t *testing.T) {
+	test := *testLanguage
+	test.PostProcess = func(t *Text) {
+		for i := range t.ProcessedWords {
+			t.ProcessedWords[i] += "a"
+		}
+	}
+	testText := NewText("ttt stop test test", &test)
+	assert.Equal(t, []string{"tta", "tesa", "tesa"}, testText.ProcessedWords, "NewText processes")
+}
+
 func TestEmptyNewText(t *testing.T) {
 	testText := NewText("", &Language{})
 	assert.Equal(t, 0, len(testText.ProcessedWords))

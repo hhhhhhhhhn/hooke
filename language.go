@@ -5,4 +5,5 @@ type Language struct {
 	isWordCharacter func(chr rune) bool
 	IsStopWord      func(word string) bool
 	Stem            func(word string) string
+	PostProcess     func(text *Text)
 }

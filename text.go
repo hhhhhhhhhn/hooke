@@ -28,6 +28,7 @@ func (t *Text) process() {
 	t.getWords()
 	t.removeStopWords()
 	t.stemWords()
+	t.postProcess()
 }
 
 // divides words and wordIndexes based on languages acceptable words + lowercase
@@ -116,5 +117,11 @@ func (t *Text) removeStopWords() {
 func (t *Text) stemWords() {
 	for i := range t.ProcessedWords {
 		t.ProcessedWords[i] = t.Language.Stem(t.ProcessedWords[i])
+	}
+}
+
+func (t *Text) postProcess() {
+	if t.Language.PostProcess != nil {
+		t.Language.PostProcess(t)
 	}
 }
