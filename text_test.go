@@ -8,7 +8,6 @@ import (
 )
 
 var testLanguage = &Language{
-	Code: "test",
 	IsWordCharacter: func(chr rune) bool {
 		return strings.Contains("teststop", string(chr))
 	},

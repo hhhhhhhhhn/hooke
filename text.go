@@ -7,12 +7,12 @@ type Text struct {
 	Raw                   string
 	LowercaseRaw          string
 	Words                 []string
-	WordsStartIndexes     []int
-	WordsEndIndexes       []int
+	WordsStartIndexes     []int // In relation to Raw
+	WordsEndIndexes       []int // In relation to Raw
 	NonStopWords          []string
-	NonStopWordsIndexes   []int
+	NonStopWordsIndexes   []int // In relation to Words
 	ProcessedWords        []string
-	ProcessedWordsIndexes []int
+	ProcessedWordsIndexes []int // In relation to Words
 }
 
 // creates and processes string into a text object

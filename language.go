@@ -1,7 +1,6 @@
 package hooke
 
 type Language struct {
-	Code            string
 	IsWordCharacter func(chr rune) bool
 	IsStopWord      func(word string) bool
 	Stem            func(word string) string

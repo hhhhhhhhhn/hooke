@@ -9,7 +9,6 @@ import (
 )
 
 var testLanguage = hooke.Language{
-	Code: "test",
 	Stem: func(word string) string {
 		return word + "+"
 	},
