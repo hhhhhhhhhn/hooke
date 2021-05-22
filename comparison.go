@@ -1,4 +1,4 @@
-package main
+package hooke
 
 type Comparison struct {
 	Text1           *Text

@@ -1,4 +1,4 @@
-package main
+package hooke
 
 import (
 	"strings"
@@ -52,8 +52,8 @@ func TestGetWordsWithoutEnding(t *testing.T) {
 
 func TestRemoveStopWords(t *testing.T) {
 	testText.removeStopWords()
-	assert.Equal(t, []string{"test"}, testText.ProcessedWords, "remove stopwords")
-	assert.Equal(t, []int{1}, testText.ProcessedWordsIndexes, "set processed word indexes")
+	assert.Equal(t, []string{"test"}, testText.NonStopWords, "remove stopwords")
+	assert.Equal(t, []int{1}, testText.NonStopWordsIndexes)
 }
 
 func TestStemWords(t *testing.T) {

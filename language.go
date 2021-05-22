@@ -1,4 +1,4 @@
-package main
+package hooke
 
 type Language struct {
 	Code            string

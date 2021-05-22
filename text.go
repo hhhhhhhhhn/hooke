@@ -1,16 +1,17 @@
-package main
+package hooke
 
 import "strings"
 
 type Text struct {
-	Language              *Language
-	Raw                   string
-	LowercaseRaw          string
-	Words                 []string
-	WordsStartIndexes     []int
-	WordsEndIndexes       []int
-	ProcessedWords        []string
-	ProcessedWordsIndexes []int
+	Language            *Language
+	Raw                 string
+	LowercaseRaw        string
+	Words               []string
+	WordsStartIndexes   []int
+	WordsEndIndexes     []int
+	NonStopWords        []string
+	NonStopWordsIndexes []int
+	ProcessedWords      []string
 }
 
 // creates and processes string into a text object
@@ -69,20 +70,20 @@ func (t *Text) getLowercase() {
 	t.LowercaseRaw = strings.ToLower(t.Raw)
 }
 
-// sets processedWords and processedWordsIndex based on language stopwords
+// sets NonStopWords and processedWordsIndex based on language stopwords
 func (t *Text) removeStopWords() {
 	for i, word := range t.Words {
 		if !t.Language.IsStopWord(word) {
-			t.ProcessedWords = append(t.ProcessedWords, word)
-			t.ProcessedWordsIndexes = append(t.ProcessedWordsIndexes, i)
+			t.NonStopWords = append(t.NonStopWords, word)
+			t.NonStopWordsIndexes = append(t.NonStopWordsIndexes, i)
 		}
 	}
 }
 
 // applies the language's stem algorithm on the processedWords
 func (t *Text) stemWords() {
-	for i := range t.ProcessedWords {
-		t.ProcessedWords[i] = t.Language.Stem(t.ProcessedWords[i])
+	for _, word := range t.NonStopWords {
+		t.ProcessedWords = append(t.ProcessedWords, t.Language.Stem(word))
 	}
 }
 
