@@ -9,7 +9,7 @@ import (
 
 var testLanguage = &Language{
 	Code: "test",
-	isWordCharacter: func(chr rune) bool {
+	IsWordCharacter: func(chr rune) bool {
 		return strings.Contains("teststop", string(chr))
 	},
 	IsStopWord: func(word string) bool {
@@ -59,6 +59,9 @@ func TestRemoveStopWords(t *testing.T) {
 func TestStemWords(t *testing.T) {
 	testText.stemWords()
 	assert.Equal(t, []string{"tes"}, testText.ProcessedWords, "stem words")
+	assert.Equal(t, []int{1}, testText.ProcessedWordsIndexes)
+	testText.NonStopWordsIndexes[0] = -1 // test they are different arrays
+	assert.Equal(t, []int{1}, testText.ProcessedWordsIndexes)
 }
 
 func TestProcess(t *testing.T) {

@@ -3,15 +3,16 @@ package hooke
 import "strings"
 
 type Text struct {
-	Language            *Language
-	Raw                 string
-	LowercaseRaw        string
-	Words               []string
-	WordsStartIndexes   []int
-	WordsEndIndexes     []int
-	NonStopWords        []string
-	NonStopWordsIndexes []int
-	ProcessedWords      []string
+	Language              *Language
+	Raw                   string
+	LowercaseRaw          string
+	Words                 []string
+	WordsStartIndexes     []int
+	WordsEndIndexes       []int
+	NonStopWords          []string
+	NonStopWordsIndexes   []int
+	ProcessedWords        []string
+	ProcessedWordsIndexes []int
 }
 
 // creates and processes string into a text object
@@ -49,7 +50,7 @@ func (t *Text) getWordStartsAndEnds() {
 	inWord := false
 
 	for i, chr := range t.LowercaseRaw {
-		if t.Language.isWordCharacter(chr) {
+		if t.Language.IsWordCharacter(chr) {
 			if !inWord {
 				inWord = true
 				t.WordsStartIndexes = append(t.WordsStartIndexes, i)
@@ -70,7 +71,7 @@ func (t *Text) getLowercase() {
 	t.LowercaseRaw = strings.ToLower(t.Raw)
 }
 
-// sets NonStopWords and processedWordsIndex based on language stopwords
+// sets NonStopWords and NonStopWordsIndexes based on language stopwords
 func (t *Text) removeStopWords() {
 	for i, word := range t.Words {
 		if !t.Language.IsStopWord(word) {
@@ -85,6 +86,8 @@ func (t *Text) stemWords() {
 	for _, word := range t.NonStopWords {
 		t.ProcessedWords = append(t.ProcessedWords, t.Language.Stem(word))
 	}
+	t.ProcessedWordsIndexes = make([]int, len(t.NonStopWordsIndexes))
+	copy(t.ProcessedWordsIndexes, t.NonStopWordsIndexes)
 }
 
 func (t *Text) postProcess() {
