@@ -35,11 +35,11 @@ func (t *Text) process() {
 func (t *Text) getWords() {
 	t.getWordStartsAndEnds()
 
-	wordCount := len(t.WordsStartIndexes)
-	t.Words = make([]string, wordCount)
-
-	for i := 0; i < wordCount; i++ {
-		t.Words[i] = t.LowercaseRaw[t.WordsStartIndexes[i]:t.WordsEndIndexes[i]]
+	for i := 0; i < len(t.WordsStartIndexes); i++ {
+		t.Words = append(
+			t.Words,
+			t.LowercaseRaw[t.WordsStartIndexes[i]:t.WordsEndIndexes[i]],
+		)
 	}
 }
 
@@ -71,20 +71,12 @@ func (t *Text) getLowercase() {
 
 // sets processedWords and processedWordsIndex based on language stopwords
 func (t *Text) removeStopWords() {
-	t.ProcessedWords = make([]string, len(t.Words)) // length is upper limit
-	t.ProcessedWordsIndexes = make([]int, len(t.Words))
-	processedWord := 0
-
 	for i, word := range t.Words {
 		if !t.Language.IsStopWord(word) {
-			t.ProcessedWords[processedWord] = word
-			t.ProcessedWordsIndexes[processedWord] = i
-			processedWord++
+			t.ProcessedWords = append(t.ProcessedWords, word)
+			t.ProcessedWordsIndexes = append(t.ProcessedWordsIndexes, i)
 		}
 	}
-
-	t.ProcessedWords = t.ProcessedWords[:processedWord] // sets actual length
-	t.ProcessedWordsIndexes = t.ProcessedWordsIndexes[:processedWord]
 }
 
 // applies the language's stem algorithm on the processedWords
