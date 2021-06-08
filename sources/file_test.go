@@ -13,7 +13,7 @@ var testLanguage = hooke.Language{
 		return word + "+"
 	},
 	IsWordCharacter: func(chr rune) bool {
-		return strings.Contains("teststop", string(chr))
+		return strings.Contains("teststop0123456789", string(chr))
 	},
 	IsStopWord: func(word string) bool {
 		return word == "stop"
