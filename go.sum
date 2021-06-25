@@ -8,6 +8,8 @@ github.com/antchfx/xmlquery v1.0.0 h1:YuEPqexGG2opZKNc9JU3Zw6zFXwC47wNcy6/F8oKsr
 github.com/antchfx/xmlquery v1.0.0/go.mod h1:/+CnyD/DzHRnv2eRxrVbieRU/FIF6N0C+7oTtyUtCKk=
 github.com/antchfx/xpath v1.0.0 h1:Q5gFgh2O40VTSwMOVbFE7nFNRBu3tS21Tn0KAWeEjtk=
 github.com/antchfx/xpath v1.0.0/go.mod h1:Yee4kTMuNiPYJ7nSNorELQMr1J33uOpXDMByNYhvtNk=
+github.com/bbalet/stopwords v1.0.0 h1:0TnGycCtY0zZi4ltKoOGRFIlZHv0WqpoIGUsObjztfo=
+github.com/bbalet/stopwords v1.0.0/go.mod h1:sAWrQoDMfqARGIn4s6dp7OW7ISrshUD8IP2q3KoqPjc=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -31,6 +33,8 @@ github.com/stretchr/objx v0.2.0/go.mod h1:qt09Ya8vawLte6SNmTgCsAVtYtaKzEcn8ATUoH
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5CcY=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+github.com/tebeka/snowball v0.4.2 h1:ujvgLOr6IHbsvB2Vgz27IcxWqDrNu9/oPhhe74lN/Kc=
+github.com/tebeka/snowball v0.4.2/go.mod h1:4IfL14h1lvwZcp1sfXuuc7/7yCsvVffTWxWxCLfFpYg=
 github.com/temoto/robotstxt v1.1.1 h1:Gh8RCs8ouX3hRSxxK7B1mO5RFByQ4CmJZDwgom++JaA=
 github.com/temoto/robotstxt v1.1.1/go.mod h1:+1AmkuG3IYkh1kv0d2qEB9Le88ehNO0zwOr3ujewlOo=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
@@ -51,8 +55,6 @@ golang.org/x/text v0.3.2 h1:tW2bmiBqwgJj/UpqtC8EpXEZVYOwU0yG4iWbprSVAcs=
 golang.org/x/text v0.3.2/go.mod h1:bEr9sfX3Q8Zfm5fL9x+3itogRgK3+ptLWKqgva+5dAk=
 golang.org/x/time v0.0.0-20201208040808-7e3f01d25324 h1:Hir2P/De0WpUhtrKGGjvSb2YxUgyZ7EFOSLIcSSpiwE=
 golang.org/x/time v0.0.0-20201208040808-7e3f01d25324/go.mod h1:tRJNPiyCQ0inRvYxbN9jk5I+vvW/OXSQhTDSoE431IQ=
-golang.org/x/time v0.0.0-20210608053304-ed9ce3a009e4 h1:1asO3s7vR+9MvZSNRwUBBTjecxbGtfvmxjy2VWbFR5g=
-golang.org/x/time v0.0.0-20210608053304-ed9ce3a009e4/go.mod h1:tRJNPiyCQ0inRvYxbN9jk5I+vvW/OXSQhTDSoE431IQ=
 golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 golang.org/x/tools v0.0.0-20190606124116-d0a3d012864b/go.mod h1:/rFqwRUd4F7ZHNgwSSTFct+R/Kf4OFW1sUzUTQQTgfc=
 google.golang.org/appengine v1.6.1 h1:QzqyMA1tlu6CgqCDUtU9V+ZKhLFT2dkJuANu5QaxI3I=
