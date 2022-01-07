@@ -38,3 +38,16 @@ func TestKShingle(t *testing.T) {
 	assert.Equal(t, expectedWords, testText.ProcessedWords)
 	assert.Equal(t, expectedIndexes, testText.ProcessedWordsIndexes)
 }
+
+func TestEmpty(t *testing.T) {
+	languageCopy := testLanguage
+	languageCopy.PostProcess = KShingle(2)
+
+	testText := hooke.NewText("", &languageCopy)
+
+	expectedWords := []string{}
+	expectedIndexes := []int{}
+
+	assert.Equal(t, expectedWords, testText.ProcessedWords)
+	assert.Equal(t, expectedIndexes, testText.ProcessedWordsIndexes)
+}

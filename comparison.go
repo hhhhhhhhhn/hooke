@@ -190,5 +190,5 @@ const maxInt int = int(^uint(0) >> 1)
 
 func (cl *Cluster) score() {
 	cl.Score = len(cl.Matches) * len(cl.Matches) *
-		(cl.Text1End - cl.Text1Start + cl.Text2End - cl.Text2Start)
+		abs(cl.Text1End - cl.Text1Start + cl.Text2End - cl.Text2Start)
 }

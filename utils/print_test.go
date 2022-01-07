@@ -9,7 +9,7 @@ import (
 
 var testLanguage = hooke.Language{
 	IsWordCharacter: func(chr rune) bool {
-		return chr != ' '
+		return chr != ' ' && chr != '\n'
 	},
 	IsStopWord: func(word string) bool { return false },
 	Stem:       func(word string) string { return word },
@@ -81,6 +81,11 @@ func TestFormatCluster(t *testing.T) {
 	assert.Equal(t, expected, formatCluster(testComparison, &testComparison.Clusters[0]))
 }
 
+func TestColapseNewlines(t *testing.T) {
+	assert.Equal(t, collapseNewlines("a b \n \n\nc\nd a"), "a b \nc\nd a")
+	assert.Equal(t, collapseNewlines("1 2 3 4 5 6 7 8 "), "1 2 3 4 5 6 7 8 ")
+}
+
 func TestFormatComparison(t *testing.T) {
 	testText1 := hooke.NewText("0 1 2 3 4 5 6 7 8 9", &testLanguage)
 	testText2 := hooke.NewText("1 2 3 d e f g 7 i 9", &testLanguage)
@@ -103,7 +108,22 @@ func TestFormatComparison(t *testing.T) {
 			"TEXT 2:\n" +
 			"3 d e f g " + highlight + "7 i 9" + reset + "\n"
 
-	assert.Equal(t, expected, formatComparison(testComparison))
+	assert.Equal(t, expected, formatComparison(testComparison, 0))
+}
+
+func TestCollapseNewlinesCluster(t *testing.T) {
+	testText1 := hooke.NewText("0 1 2 3 4\n\n \n5 6 7 8 9", &testLanguage)
+	testText2 := hooke.NewText("1 2 3 d e\n\n\nf g 7 i 9", &testLanguage)
+
+	testComparison := hooke.NewComparison(testText1, testText2, 3)
+
+	expected := "TEXT 1:\n" +
+		"0 " + highlight + "1 2 3 " + reset + "4\n5 6 7 8 \n" +
+		"\n" +
+		"TEXT 2:\n" +
+		highlight + "1 2 3 " + reset + "d e\nf g 7 "
+
+	assert.Equal(t, expected, formatCluster(testComparison, &testComparison.Clusters[0]))
 }
 
 func TestPrint(t *testing.T) {
@@ -128,7 +148,7 @@ func TestPrint(t *testing.T) {
 			"TEXT 2:\n" +
 			"3 d e f g " + highlight + "7 i 9" + reset + "\n"
 
-	written, err := PrintComparison(testComparison)
+	written, err := PrintComparison(testComparison, 0)
 	assert.Equal(t, len(expected), written)
 	assert.Nil(t, err)
 }

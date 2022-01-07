@@ -2,21 +2,27 @@ package utils
 
 import (
 	"fmt"
+	"regexp"
 
 	h "github.com/hhhhhhhhhn/hooke"
 )
 
-func PrintComparison(c *h.Comparison) (int, error) {
-	return fmt.Print(formatComparison(c))
+func PrintComparison(c *h.Comparison, minScore int) (int, error) {
+	return fmt.Print(formatComparison(c, minScore))
 }
 
-func formatComparison(c *h.Comparison) (formatted string) {
+func formatComparison(c *h.Comparison, minScore int) (formatted string) {
 	for i, cluster := range c.Clusters {
+		if cluster.Score >= minScore {
 		formatted +=
 			"CLUSTER " + fmt.Sprint(i+1) + ":\n" +
 				formatCluster(c, &cluster) + "\n\n\n"
+		}
 	}
-	return formatted[:len(formatted)-2] // strips last 2 newlines
+	if len(formatted) != 0 {
+		return formatted[:len(formatted)-2] // strips last 2 newlines
+	}
+	return "No Matches Found\n"
 }
 
 func formatCluster(c *h.Comparison, cl *h.Cluster) string {
@@ -27,11 +33,19 @@ func formatCluster(c *h.Comparison, cl *h.Cluster) string {
 }
 
 func formatText(t *h.Text, start int, end int) string {
-	return processedIndexToRaw(t, start-5, start-1) +
+	text := processedIndexToRaw(t, start-5, start-1)+
 		highlight +
 		processedIndexToRaw(t, start, end) +
 		reset +
 		processedIndexToRaw(t, end+1, end+5)
+	collapsed := collapseNewlines(text)
+	return collapsed
+}
+
+var emptyLine, _ = regexp.Compile(`\n\s*(\n\s*)+`)
+
+func collapseNewlines(raw string) (collapsed string) {
+	return emptyLine.ReplaceAllString(raw, "\n")
 }
 
 func processedIndexToRaw(t *h.Text, start int, end int) string {
